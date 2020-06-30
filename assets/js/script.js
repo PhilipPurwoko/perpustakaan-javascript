@@ -125,6 +125,9 @@ class Akun extends Perpustakaan{
 			let a = Number(getElementByXpath(`//*[@id="perpus-table"]/tr[${index+1}]/td[4]`).innerHTML);
 			getElementByXpath(`//*[@id="perpus-table"]/tr[${index+1}]/td[4]`).innerHTML = a-1;
 			console.log('Berhasil meminjam ',data[1]);
+
+			let interaction = document.querySelector('#interact-container')
+			interaction.innerHTML = `Berhasil meminjam ${data[1]}`
 			return this
 		} else if (data[0] == false){
 			console.log('Maaf,',buku,' tidak ditemukan')
@@ -164,6 +167,11 @@ cari_button.addEventListener('click',function(){
 });
 
 // Pinjam buku listener
-const pinjam_button = document.querySelector
+const pinjam_button = document.querySelector("#pinjam-buku")
+pinjam_button.addEventListener('click',function(){
+	let message = document.querySelector('#pinjam-buku-input').value
+	console.log(`Meminjam ${message}`)
+	result = user.pinjam(message)
+})
 
 // user.lihat_daftar().pinjam('Javascript Expert').lihat_daftar().cek_pinjaman();
