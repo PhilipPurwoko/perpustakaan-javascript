@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Perpustakaan</title>
+	<link rel="stylesheet" href="assets/css/bootstrap-grid.css">
+	<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap-reboot.css">
+	<link rel="stylesheet" href="assets/css/bootstrap-reboot.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+	<div class="container p-3 my-3 bg-dark text-white">
+		<div class="row">
+			<div class="col"><h1>Welcome</h1></div>
+		</div>
+		<div class="row">
+			<div class="col"><div class="col"><p>Any books in one place</p></div></div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input type="text" placeholder="ID" id='book-id' class="form-control">
+				<input type="text" placeholder="Title" id='book-title' class="form-control">
+				<input type="text" placeholder="Author" id='book-author' class="form-control">
+				<input type="text" placeholder="Stock" id='book-stock' class="form-control">
+				<button id='add-book' class="btn">Add Book</button>
+				<button id='toogle-book' class="btn">Hide Book</button>
+			</div>
+		</div>
+	</div>
+	<div class="container p-3 my-3 border">
+		<table style="display: block" id="whole-table" class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Stock</th>
+				</tr>
+			</thead>
+			<tbody id="perpus-table"></tbody>
+		</table>
+	</div>
+	<div class="container p-3 my-3 bg-dark text-white" id='interact-container'></div>
+	<div class="container p-3 my-3 bg-dark text-white">
+		<div class="row">
+			<div class="col">
+				<h2>Cari Buku</h2>
+				<input class="form-control" id='cari-buku-input' type="text" placeholder="Judul buku">
+				<button class="btn" id="cari-buku">Cari</button>
+			</div>
+			<div class="col">
+				<h2>Pinjam Buku</h2>
+				<input class="form-control" type="text" placeholder="Judul buku">
+				<button class="btn" id="pinjam-buku">Pinjam</button>
+			</div>
+			<div class="col">
+				<h2>Kembalikan Buku</h2>
+				<input class="form-control" type="text" placeholder="Judul buku">
+				<button class="btn" id="kembalikan-buku">Kembalikan</button>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="assets/js/jquery.js"></script>
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/script.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+</html>
