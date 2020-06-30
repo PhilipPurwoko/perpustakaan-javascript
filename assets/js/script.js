@@ -128,6 +128,13 @@ class Akun extends Perpustakaan{
 
 			let interaction = document.querySelector('#interact-container')
 			interaction.innerHTML = `Berhasil meminjam ${data[1]}`
+
+			// Pinjaman div
+			let pinjaman = document.querySelector('#pinjaman')
+			let node = document.createElement('DIV')
+			let textnode = document.createTextNode(data[1])
+			node.appendChild(textnode)
+			pinjaman.appendChild(node)
 			return this
 		} else if (data[0] == false){
 			console.log('Maaf,',buku,' tidak ditemukan')
@@ -141,16 +148,29 @@ class Akun extends Perpustakaan{
 	};
 	kembalikan_buku(buku){
 		let data = this.cari(buku,this.pinjaman[0]);
+		let interaction = document.querySelector('#interact-container');
 		if (data[0]){
 			let index = this.pinjaman[1][this.pinjaman[0].indexOf(buku)]
-			let value_now = getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`).innerHTML;
+			// let value_now = getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`).innerHTML;
 			getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`).innerHTML = Number(getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`).innerHTML) + 1;
 			this.pinjaman[0].splice(data[1],1);
 			this.pinjaman[1].splice(this.pinjaman[0].indexOf(data[1]));
 			console.log('Berhasil mengembalikan ',data[1]);
+			interaction.innerHTML = `Berhasil mengembalikan ${data[1]}`
+
+			// Update pinjaman div
+			let pinjaman = document.querySelector('#pinjaman')
+			let pinjaman_list = pinjaman.children
+			for (let i = 0; i < pinjaman_list.length; i++) {
+				if (pinjaman_list[i].innerHTML == data[1]){
+					pinjaman.removeChild(pinjaman.childNodes[i])
+					break
+				}
+			}
 			return this
 		} else if (data[0] == false){
 			console.log('Anda tidak meminjam buku ',buku)
+			interaction.innerHTML = `Anda tidak meminjam buku ${data[1]}`
 			return this
 		};
 	};
@@ -172,6 +192,14 @@ pinjam_button.addEventListener('click',function(){
 	let message = document.querySelector('#pinjam-buku-input').value
 	console.log(`Meminjam ${message}`)
 	result = user.pinjam(message)
+})
+
+// Kembalikan buku listenner
+const kembalikan_button = document.querySelector('#kembalikan-buku')
+kembalikan_button.addEventListener('click',function(){
+	let message = document.querySelector('#kembalikan-buku-input').value
+	console.log(`Mengembalikan buku ${message}`)
+	result = user.kembalikan_buku(message)
 })
 
 // user.lihat_daftar().pinjam('Javascript Expert').lihat_daftar().cek_pinjaman();
