@@ -72,8 +72,6 @@ window.onload = DefaultTable(3);
 
 // Cari buku
 function CariBuku(){
-	let books = []
-	let table = document.querySelector('#perpus-table');
 
 	
 	// console.log(table.rows[1].cells[2].innerHTML)
@@ -99,7 +97,6 @@ class Perpustakaan{
 				res = true;
 			};
 		});	
-		let interaction = document.querySelector('#interact-container')
 		if (res==true){
 			sendNotification(`${cari} found`)
 		} else{
@@ -126,7 +123,6 @@ class Akun extends Perpustakaan{
 			getElementByXpath(`//*[@id="perpus-table"]/tr[${index+1}]/td[4]`).innerHTML = a-1;
 			console.log('Berhasil meminjam ',data[1]);
 
-			let interaction = document.querySelector('#interact-container')
 			sendNotification(`Berhasil meminjam ${data[1]}`)
 
 			// Pinjaman div
@@ -148,9 +144,23 @@ class Akun extends Perpustakaan{
 	};
 	kembalikan_buku(buku){
 		let data = this.cari(buku,this.pinjaman[0]);
-		let interaction = document.querySelector('#interact-container');
 		if (data[0]){
-			let index = this.pinjaman[1][this.pinjaman[0].indexOf(buku)]
+
+			// Find index
+			let table_rows = document.querySelector('#perpus-table').children;
+			let index;
+			for (let i = 0; i < table_rows.length; i++) {
+				let row_cols = table_rows[i].children;
+				let count = Number(row_cols[3].innerHTML);
+				console.log(row_cols[1].innerHTML,buku,count,typeof(count));
+				if (row_cols[1].innerHTML == buku){
+					index = i+1;
+					console.log(index)
+					break
+				};
+			};
+
+			console.log(getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`))
 			// let value_now = getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`).innerHTML;
 			getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`).innerHTML = Number(getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`).innerHTML) + 1;
 			this.pinjaman[0].splice(data[1],1);
@@ -170,7 +180,7 @@ class Akun extends Perpustakaan{
 			return this
 		} else if (data[0] == false){
 			console.log('Anda tidak meminjam buku ',buku);
-			sendNotification(`Anda tidak meminjam buku ${data[1]}`);
+			sendNotification(`Anda tidak meminjam buku ${buku}`);
 			return this;
 		};
 	};
