@@ -17,6 +17,16 @@ function getElementByXpath(path) {
 	return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 }
 
+// Animating Notification
+function sendNotification(text){
+	let interact = document.querySelector('#interact-container');
+	interact.innerHTML = text;
+	interact.style = 'margin-left:-10px';
+	setTimeout(function(){
+		interact.style = 'margin-left:-250px';
+	},2000);
+};
+
 // Function remove book
 function DeleteRow(index){
 	document.querySelector('#perpus-table').deleteRow(index);
@@ -38,12 +48,18 @@ function InsertRow(id,title,author,stock){
 
 // Listener add book
 document.querySelector("#add-book").addEventListener("click", function(){
-	let id = document.querySelector('#book-id').value;
+	let rows = document.querySelector("#perpus-table").children.length;
+	let id = getElementByXpath(`//*[@id="perpus-table"]/tr[${rows}]/td[1]`).innerHTML;
 	let title = document.querySelector('#book-title').value;
 	let author = document.querySelector('#book-author').value;
 	let stock = document.querySelector('#book-stock').value;
-
-	InsertRow(id,title,author,stock);
+	
+	if (parseInt(stock) > 0){
+		InsertRow(Number(id)+1,title,author,stock);
+		sendNotification(`Added ${stock} books ${title} by ${author}`)
+	} else{
+		sendNotification('Sorry, stock value must a number');
+	};
 });
 
 // Listener toogle display book
@@ -211,15 +227,5 @@ kembalikan_button.addEventListener('click',function(){
 	console.log(`Mengembalikan buku ${message}`)
 	result = user.kembalikan_buku(message)
 })
-
-// Animating Notification
-function sendNotification(text){
-	let interact = document.querySelector('#interact-container');
-	interact.innerHTML = text;
-	interact.style = 'margin-left:-10px';
-	setTimeout(function(){
-		interact.style = 'margin-left:-250px';
-	},2000);
-};
 
 // user.lihat_daftar().pinjam('Javascript Expert').lihat_daftar().cek_pinjaman();
