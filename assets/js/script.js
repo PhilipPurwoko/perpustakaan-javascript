@@ -101,9 +101,9 @@ class Perpustakaan{
 		});	
 		let interaction = document.querySelector('#interact-container')
 		if (res==true){
-			interaction.innerHTML = `${cari} found`
+			sendNotification(`${cari} found`)
 		} else{
-			interaction.innerHTML = `Sorry, cant find ${cari}`
+			sendNotification(`Sorry, cant find ${cari}`)
 		}
 		if (res){
 			return [true,cari];
@@ -127,7 +127,7 @@ class Akun extends Perpustakaan{
 			console.log('Berhasil meminjam ',data[1]);
 
 			let interaction = document.querySelector('#interact-container')
-			interaction.innerHTML = `Berhasil meminjam ${data[1]}`
+			sendNotification(`Berhasil meminjam ${data[1]}`)
 
 			// Pinjaman div
 			let pinjaman = document.querySelector('#pinjaman')
@@ -156,7 +156,7 @@ class Akun extends Perpustakaan{
 			this.pinjaman[0].splice(data[1],1);
 			this.pinjaman[1].splice(this.pinjaman[0].indexOf(data[1]));
 			console.log('Berhasil mengembalikan ',data[1]);
-			interaction.innerHTML = `Berhasil mengembalikan ${data[1]}`
+			sendNotification(`Berhasil mengembalikan ${data[1]}`);
 
 			// Update pinjaman div
 			let pinjaman = document.querySelector('#pinjaman')
@@ -169,9 +169,9 @@ class Akun extends Perpustakaan{
 			}
 			return this
 		} else if (data[0] == false){
-			console.log('Anda tidak meminjam buku ',buku)
-			interaction.innerHTML = `Anda tidak meminjam buku ${data[1]}`
-			return this
+			console.log('Anda tidak meminjam buku ',buku);
+			sendNotification(`Anda tidak meminjam buku ${data[1]}`);
+			return this;
 		};
 	};
 };
@@ -201,5 +201,15 @@ kembalikan_button.addEventListener('click',function(){
 	console.log(`Mengembalikan buku ${message}`)
 	result = user.kembalikan_buku(message)
 })
+
+// Animating Notification
+function sendNotification(text){
+	let interact = document.querySelector('#interact-container');
+	interact.innerHTML = text;
+	interact.style = 'margin-left:-10px';
+	setTimeout(function(){
+		interact.style = 'margin-left:-250px';
+	},2000);
+};
 
 // user.lihat_daftar().pinjam('Javascript Expert').lihat_daftar().cek_pinjaman();
