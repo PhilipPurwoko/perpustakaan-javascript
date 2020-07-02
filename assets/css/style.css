@@ -1,3 +1,12 @@
+/* Navbar style */
+.navbar-style{
+    position: fixed;
+    margin-top: -18px;
+    width: 100%;
+    z-index: 2;
+    padding-top: 20px;
+}
+
 /* Notification Animation */
 #interact-container{
     position: fixed;
@@ -8,6 +17,7 @@
     border-radius: 8px;
     transition: all 0.5s ease;
     margin-left: -250px;
+    margin-top: 80px;
     border: 2px solid white;
     background-color: rgba(100, 100, 100, 0.8);
 }
@@ -34,4 +44,9 @@
 #perpus-table tr:hover {
     background-color: #ddd;
     transition: all 0.2s ease;
+}
+
+/* Padding 5px */
+.margin5px{
+    margin: 5px;
 }

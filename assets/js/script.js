@@ -166,8 +166,7 @@ class Akun extends Perpustakaan{
 				pinjaman.childNodes[pinjaman.childElementCount-1].style.opacity = 1;
 				clearTimeout(timeout);
 			},0);
-			// node.classList.add("box", "faded-out");
-			// node.classList.remove("faded-out");
+			this.cek_pinjaman();
 			return this
 		} else if (data[0] == false){
 			console.log('Maaf,',buku,' tidak ditemukan')
@@ -189,15 +188,15 @@ class Akun extends Perpustakaan{
 			for (let i = 0; i < table_rows.length; i++) {
 				let row_cols = table_rows[i].children;
 				let count = Number(row_cols[3].innerHTML);
-				console.log(row_cols[1].innerHTML,buku,count,typeof(count));
+				// console.log(row_cols[1].innerHTML,buku,count,typeof(count));
 				if (row_cols[1].innerHTML == buku){
 					index = i+1;
-					console.log(index)
+					// console.log(index)
 					break
 				};
 			};
 
-			console.log(getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`))
+			// console.log(getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`))
 			// let value_now = getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`).innerHTML;
 			getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`).innerHTML = Number(getElementByXpath(`//*[@id="perpus-table"]/tr[${index}]/td[4]`).innerHTML) + 1;
 			this.pinjaman[0].splice(data[1],1);
@@ -209,6 +208,7 @@ class Akun extends Perpustakaan{
 			let pinjaman = document.querySelector('#pinjaman')
 			let pinjaman_list = pinjaman.children
 			for (let i = 0; i < pinjaman_list.length; i++) {
+				console.log(`Membandingkan ${pinjaman_list[i].innerHTML} dengan ${data[1]}`);
 				if (pinjaman_list[i].innerHTML == data[1]){
 					pinjaman.childNodes[i].style.opacity = 0;
 					let timeout = setTimeout(function(){
@@ -218,10 +218,12 @@ class Akun extends Perpustakaan{
 					break
 				}
 			}
+			this.cek_pinjaman();
 			return this
 		} else if (data[0] == false){
 			console.log('Anda tidak meminjam buku ',buku);
 			sendNotification(`Anda tidak meminjam buku ${buku}`);
+			this.cek_pinjaman();
 			return this;
 		};
 	};
