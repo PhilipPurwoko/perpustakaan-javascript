@@ -1,3 +1,4 @@
+/* Notification Animation */
 #interact-container{
     position: fixed;
     z-index: 1;
@@ -9,4 +10,28 @@
     margin-left: -250px;
     border: 2px solid white;
     background-color: rgba(100, 100, 100, 0.8);
+}
+
+/* Dynamic pop up pinjaman buku */
+#pinjaman{
+    transition: all 0.5s;
+}
+.box{
+    transition: opacity 500ms;
+    will-change: opacity;
+}
+.box .faded-out {
+    opacity: 0;
+}
+
+/* Table Animation*/
+#whole-table{
+    opacity: 1;
+}
+#table-row {
+    padding: 30px;
+}
+#perpus-table tr:hover {
+    background-color: #ddd;
+    transition: all 0.2s ease;
 }

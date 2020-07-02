@@ -22,8 +22,9 @@ function sendNotification(text){
 	let interact = document.querySelector('#interact-container');
 	interact.innerHTML = text;
 	interact.style = 'margin-left:-10px';
-	setTimeout(function(){
+	let timeout = setTimeout(function(){
 		interact.style = 'margin-left:-250px';
+		clearTimeout(timeout);
 	},2000);
 };
 
@@ -66,12 +67,22 @@ document.querySelector("#add-book").addEventListener("click", function(){
 document.querySelector("#toogle-book").addEventListener("click", function(){
 	let status = document.querySelector('#toogle-book');
 	let table = document.querySelector('#whole-table');
-	if (table.style.display == 'block'){
+	let the_row = document.querySelector('#table-row');
+	if (table.style.display == ''){
 		status.innerHTML = 'Hide Book';
-		table.style.display = 'none';
+		table.style.transition = 500;
+		table.style.opacity = 0;
+		let timeout = setTimeout(function(){
+			table.style.display = 'none';
+			the_row.style.padding = '0px';
+			clearTimeout(timeout);
+		},500);
 	} else {
+		table.style.transition = 500;
 		status.innerHTML = 'Show Book';
-		table.style.display = 'block';
+		the_row.style.padding = '30px';
+		table.style.display = '';
+		table.style.opacity = 1;
 	}
 });
 
@@ -139,14 +150,24 @@ class Akun extends Perpustakaan{
 			getElementByXpath(`//*[@id="perpus-table"]/tr[${index+1}]/td[4]`).innerHTML = a-1;
 			console.log('Berhasil meminjam ',data[1]);
 
-			sendNotification(`Berhasil meminjam ${data[1]}`)
+			sendNotification(`Berhasil meminjam ${data[1]}`);
 
 			// Pinjaman div
-			let pinjaman = document.querySelector('#pinjaman')
-			let node = document.createElement('DIV')
-			let textnode = document.createTextNode(data[1])
-			node.appendChild(textnode)
-			pinjaman.appendChild(node)
+			let pinjaman = document.querySelector('#pinjaman');
+			let node = document.createElement('div');
+			let textnode = document.createTextNode(data[1]);
+			node.classList.add('box');
+			node.appendChild(textnode);
+			pinjaman.appendChild(node);
+
+			document.getElementById('pinjaman').style.transition = 'all 0.5s';
+			pinjaman.childNodes[pinjaman.childElementCount-1].style.opacity = 0;
+			let timeout = setTimeout(function(){
+				pinjaman.childNodes[pinjaman.childElementCount-1].style.opacity = 1;
+				clearTimeout(timeout);
+			},0);
+			// node.classList.add("box", "faded-out");
+			// node.classList.remove("faded-out");
 			return this
 		} else if (data[0] == false){
 			console.log('Maaf,',buku,' tidak ditemukan')
@@ -189,7 +210,11 @@ class Akun extends Perpustakaan{
 			let pinjaman_list = pinjaman.children
 			for (let i = 0; i < pinjaman_list.length; i++) {
 				if (pinjaman_list[i].innerHTML == data[1]){
-					pinjaman.removeChild(pinjaman.childNodes[i])
+					pinjaman.childNodes[i].style.opacity = 0;
+					let timeout = setTimeout(function(){
+						pinjaman.removeChild(pinjaman.childNodes[i]);
+						clearTimeout(timeout);
+					},500);
 					break
 				}
 			}
