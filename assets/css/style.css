@@ -6,6 +6,10 @@
     z-index: 2;
     padding-top: 20px;
 }
+#brand-title{
+    font-size: x-large;
+    font-weight: 500;
+}
 
 /* Notification Animation */
 #interact-container{

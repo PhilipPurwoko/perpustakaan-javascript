@@ -69,7 +69,7 @@ document.querySelector("#toogle-book").addEventListener("click", function(){
 	let table = document.querySelector('#whole-table');
 	let the_row = document.querySelector('#table-row');
 	if (table.style.display == ''){
-		status.innerHTML = 'Hide Book';
+		status.innerHTML = 'Show Book';
 		table.style.transition = 500;
 		table.style.opacity = 0;
 		let timeout = setTimeout(function(){
@@ -79,7 +79,7 @@ document.querySelector("#toogle-book").addEventListener("click", function(){
 		},500);
 	} else {
 		table.style.transition = 500;
-		status.innerHTML = 'Show Book';
+		status.innerHTML = 'Hide Book';
 		the_row.style.padding = '30px';
 		table.style.display = '';
 		table.style.opacity = 1;
