@@ -1,3 +1,7 @@
+html{
+    scroll-behavior: smooth;
+}
+
 /* Navbar style */
 .navbar-style{
     position: fixed;
@@ -9,6 +13,11 @@
 #brand-title{
     font-size: x-large;
     font-weight: 500;
+}
+.hover-navbar-effect :hover{
+    text-shadow: 2px 2px 5px azure;
+    color: white;
+    transition: all 0.2s ease;
 }
 
 /* Notification Animation */

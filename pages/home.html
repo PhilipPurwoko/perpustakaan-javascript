@@ -11,16 +11,30 @@
 	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<nav class="navbar navbar-expand-lg navbar-light bg-dark text-white navbar-style">
-	<div class="row">
-		<div class="col"><img style="width: 40px;" class="img-fluid" src="../assets/images/stock-vector-open-book-icon-simple-illustration-of-open-book-vector-icon-for-web-education-icon-1194740446.jpg"></div>
-		<div class="col"><a id="brand-title" class="navbar-brand">Li-Brary</a></div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed;z-index: 1;width: 100%;">
+	<a href="#" class="navbar-brand"  style="font-weight: 500;">Lib-Array</a>
+	<!-- Dropdown Expand -->
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav">
+			<li class="nav-item hover-navbar-effect">
+				<a class="nav-link" href="#upload-div">Upload</a>
+			</li>
+			<li class="nav-item hover-navbar-effect">
+				<a class="nav-link" href="#pinjam-div">Pinjam</a>
+			</li>
+			<li class="nav-item hover-navbar-effect">
+				<a class="nav-link disabled" href="#semuabuku-div">Semua Buku</a>
+			</li>
+		</ul>
 	</div>
 </nav>
 <body>
 	<div style="height: 50px;"></div>
 	<div class="container text-white" id='interact-container'></div>
-	<div class="container p-3 my-3 bg-white border">
+	<div class="container p-3 my-3 bg-white border" id="upload-div">
 		<div class="row">
 			<div class="col">
 				<img class="img-fluid" src="../assets/images/stock-vector-book-festival-concept-of-a-small-people-reading-a-open-huge-book-vector-illustration-poster-and-1209459016.jpg">
@@ -44,7 +58,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container p-3 my-3" style="text-align: center;">
+	<div class="container p-3 my-3" id="pinjam-div" style="text-align: center;">
 		<div class="row">
 			<div class="col">
 				<img style="width: 285px;" class="img-fluid" src="../assets/images/stock-vector-online-library-e-books-flat-design-vector-illustration-763347391.jpg" alt="">
@@ -81,7 +95,7 @@
 			<div class="col" id='pinjaman'></div>
 		</div>
 	</div>
-	<div class="container p-3 my-3 border">
+	<div class="container p-3 my-3 border" id="semuabuku-div">
 		<div class="row">
 			<div class="col">
 				<h2>Daftar Buku</h2>
