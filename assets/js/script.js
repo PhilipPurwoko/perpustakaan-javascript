@@ -88,25 +88,25 @@ document.querySelector("#toogle-book").addEventListener("click", function(){
 
 
 // Default add book
-function DefaultTable(count){
-	let titles = ['Python 101','Javascript Expert','Typescript fundamental']
-	let authors = ['Black Jack','John Murph','Elizabeth Ily']
-	for (let i = 0; i < count; i++) {
-		InsertRow(i,titles[i],authors[i],100)
-	}
+function DefaultTable(){
+	let books = [];
+	let topics = ['Python','Javascript','Typescript','HTML','CSS','PHP','Node.js','Django','SQL','Java','C','C++','C#'];
+	let titles = ['Tingkat Dasar','Tingkat Menengah','Tingkat Atas'];
+	let authors = ['Jack','John','Elizabeth','Maria','Lucas','Hendry','Daniel','Philip','Adam'];
+
+	for (let i = 0; i < topics.length; i++) {
+		for (let j = 0; j < titles.length; j++) {
+			books.push(topics[i] + ' ' + titles[j]);
+		};
+	};
+
+	for (let i = 0; i < books.length; i++) {
+		let author = authors[Math.floor(Math.random() * authors.length)];
+		let num = Math.floor(Math.random() * 100) + 1;
+		InsertRow(i,books[i],author,num);
+	};
 };
-window.onload = DefaultTable(3);
-
-// Cari buku
-function CariBuku(){
-
-	
-	// console.log(table.rows[1].cells[2].innerHTML)
-};
-document.querySelector('#cari-buku').addEventListener('click',function(){
-	CariBuku();
-});
-
+window.onload = DefaultTable();
 
 // Logic
 class Perpustakaan{
